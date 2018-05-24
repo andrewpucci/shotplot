@@ -10,11 +10,21 @@
   svg.addEventListener(
     "mousedown",
     function(evt) {
-      var loc = cursorPoint(evt);
-      console.log(
-        Math.round((loc.x - 1202) * 2.54, 1),
-        Math.round(-(loc.y - 512) * 2.54, 1)
+      const loc = cursorPoint(evt);
+      const coordinates = new Map();
+      coordinates.set("x", Math.round((loc.x - 1202) * 2.54, 1));
+      coordinates.set("y", Math.round(-(loc.y - 512) * 2.54, 1));
+
+      var newP = document.createElement("p");
+      var coords = document.createTextNode(
+        `${coordinates.get("x")}, ${coordinates.get("y")}`
       );
+
+      newP.appendChild(coords);
+
+      const list = document.getElementById("c-home");
+      list.insertBefore(newP, list.childNodes[0]);
+      console.log(coordinates.get("x"), coordinates.get("y"));
     },
     false
   );
