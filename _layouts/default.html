@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>{{ page.title }}</title>
+  <meta name="description" content="{{ page.description }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- TODO: add app icons
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  -->
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="{{'/assets/main.css' | relative_url}}">
+</head>
+
+<body>
+  {% include front-page.html %}
+  <script src="{{'/assets/main.js' | relative_url}}"></script>
+  <script src="{{'/assets/vendor/jquery.min.js' | relative_url}}"></script>
+  <script src="{{'/assets/vendor/popper.min.js' | relative_url}}"></script>
+  <script src="{{'/assets/vendor/bootstrap.min.js' | relative_url}}"></script>
+</body>
+
+</html>

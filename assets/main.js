@@ -15,8 +15,8 @@
       coordinates.set("x", Math.round((loc.x - 1202) * 2.54, 1));
       coordinates.set("y", Math.round(-(loc.y - 512) * 2.54, 1));
 
-      var newP = document.createElement("p");
-      var coords = document.createTextNode(
+      const newP = document.createElement("p");
+      const coords = document.createTextNode(
         `${coordinates.get("x")}, ${coordinates.get("y")}`
       );
 
