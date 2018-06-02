@@ -29,6 +29,8 @@ sass:
         - _sass
         - node_modules
     style: compressed
+plugins:
+  - jekyll-autoprefixer
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

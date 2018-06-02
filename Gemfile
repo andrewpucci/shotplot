@@ -6,3 +6,7 @@ source "https://rubygems.org"
 #
 #     bundle exec jekyll serve
 gem "jekyll", "~> 3.8"
+
+group :jekyll_plugins do
+  gem "jekyll-autoprefixer"
+end
