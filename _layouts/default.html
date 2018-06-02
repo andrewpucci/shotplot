@@ -32,7 +32,8 @@
 </head>
 
 <body>
-  {% include front-page.html %}
+  {% include nav.html %} {% if page.content-type == "front" %} {% include front-page.html %} {% else %} {{ content }} {% endif
+  %}
   <script src="{{'/assets/main.js' | relative_url}}"></script>
   <script src="{{'/assets/vendor/jquery.min.js' | relative_url}}"></script>
   <script src="{{'/assets/vendor/popper.min.js' | relative_url}}"></script>
