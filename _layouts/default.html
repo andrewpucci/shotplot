@@ -28,16 +28,23 @@
   <meta name="msapplication-config" content="{{'browserconfig.xml' | relative_url}}">
   <meta name="theme-color" content="#faffff">
 
+  <link rel="stylesheet" href="{{'/assets/vendor/dataTables.bootstrap4.css' | relative_url}}">
+  <link rel="stylesheet" href="{{'/assets/vendor/buttons.bootstrap4.min.css' | relative_url}}">
   <link rel="stylesheet" href="{{'/assets/main.css' | relative_url}}">
 </head>
 
 <body>
   {% include nav.html %} {% if page.content-type == "front" %} {% include front-page.html %} {% else %} {{ content }} {% endif
   %}
-  <script src="{{'/assets/main.js' | relative_url}}"></script>
   <script src="{{'/assets/vendor/jquery.min.js' | relative_url}}"></script>
   <script src="{{'/assets/vendor/popper.min.js' | relative_url}}"></script>
   <script src="{{'/assets/vendor/bootstrap.min.js' | relative_url}}"></script>
+  <script src="{{'/assets/vendor/jquery.dataTables.js' | relative_url}}"></script>
+  <script src="{{'/assets/vendor/dataTables.bootstrap4.js' | relative_url}}"></script>
+  <script src="{{'/assets/vendor/dataTables.buttons.min.js' | relative_url}}"></script>
+  <script src="{{'/assets/vendor/buttons.html5.min.js' | relative_url}}"></script>
+  <script src="{{'/assets/vendor/buttons.bootstrap4.min.js' | relative_url}}"></script>
+  <script src="{{'/assets/main.js' | relative_url}}"></script>
 </body>
 
 </html>

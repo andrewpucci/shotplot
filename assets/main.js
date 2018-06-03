@@ -7,34 +7,46 @@
     return pt.matrixTransform(svg.getScreenCTM().inverse());
   }
 
+  let tableData = [];
+
   svg.addEventListener(
     "mousedown",
     function(evt) {
       const loc = cursorPoint(evt);
-      const coordinates = new Map();
+      let coordinates = {};
       const element = document.getElementById("unit-selector");
       const unitType = element.options[element.selectedIndex].value;
       if (unitType === "cm") {
-        coordinates.set("x", Math.round((loc.x - 1202) * 2.54, 1));
-        coordinates.set("y", Math.round(-(loc.y - 512) * 2.54, 1));
+        coordinates = {
+          x: Math.round((loc.x - 1202) * 2.54, 1),
+          y: Math.round(-(loc.y - 512) * 2.54, 1)
+        };
       } else if (unitType === "in") {
-        coordinates.set("x", Math.round(loc.x - 1202, 1));
-        coordinates.set("y", Math.round(-(loc.y - 512), 1));
+        coordinates = {
+          x: Math.round(loc.x - 1202, 1),
+          y: Math.round(-(loc.y - 512), 1)
+        };
       } else if (unitType === "ft") {
-        coordinates.set("x", Math.round((loc.x - 1202) / 12, 1));
-        coordinates.set("y", Math.round(-(loc.y - 512) / 12, 1));
+        coordinates = {
+          x: Math.round((loc.x - 1202) / 12, 1),
+          y: Math.round(-(loc.y - 512) / 12, 1)
+        };
       }
 
       const newP = document.createElement("p");
       const coords = document.createTextNode(
-        `${coordinates.get("x")}, ${coordinates.get("y")}`
+        `${coordinates["x"]}, ${coordinates["y"]}`
       );
 
-      newP.appendChild(coords);
-
-      const list = document.getElementById("c-home");
-      list.insertBefore(newP, list.childNodes[0]);
-      console.log(coordinates.get("x"), coordinates.get("y"));
+      tableData.unshift(coordinates);
+      $("#coord-table").DataTable({
+        dom: "B<'clear'>rtip",
+        destroy: true,
+        data: tableData,
+        ordering: false,
+        columns: [{ title: "X", data: "x" }, { title: "Y", data: "y" }],
+        buttons: ["csvHtml5"]
+      });
     },
     false
   );
