@@ -45,7 +45,12 @@
         data: tableData,
         ordering: false,
         columns: [{ title: "X", data: "x" }, { title: "Y", data: "y" }],
-        buttons: ["csvHtml5"]
+        buttons: [
+          {
+            extend: "csvHtml5",
+            text: "Export to CSV"
+          }
+        ]
       });
     },
     false
