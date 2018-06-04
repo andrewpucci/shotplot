@@ -4,6 +4,7 @@
   const xOffset = { NA: 1202 };
   const yOffset = { NA: 512 };
   const rinkType = "NA";
+  const shotColor = "#F06";
   let tableData = [];
   let shotCounter = 0;
 
@@ -13,14 +14,14 @@
     return pt.matrixTransform(rink.getScreenCTM().inverse());
   }
 
-  function drawCircle(elem, id, x, y) {
+  function drawCircle(elem, id, shotLocation) {
     const ns = "http://www.w3.org/2000/svg";
     const circle = document.createElementNS(ns, "circle");
     circle.setAttributeNS(null, "id", id);
-    circle.setAttributeNS(null, "cx", x);
-    circle.setAttributeNS(null, "cy", y);
+    circle.setAttributeNS(null, "cx", shotLocation.x);
+    circle.setAttributeNS(null, "cy", shotLocation.y);
     circle.setAttributeNS(null, "r", 25);
-    circle.setAttributeNS(null, "fill", "#f06");
+    circle.setAttributeNS(null, "fill", shotColor);
     elem.appendChild(circle);
   }
 
@@ -78,7 +79,7 @@
       });
 
       // draw a circle on the rink at shot location
-      drawCircle(rink, shotID, shotLocation.x, shotLocation.y);
+      drawCircle(rink, shotID, shotLocation);
     },
     false
   );
