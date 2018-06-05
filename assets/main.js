@@ -1,10 +1,11 @@
 (function() {
   const rink = document.getElementById("svg2457");
+  const unitSelector = document.getElementById("unit-selector");
   const pt = rink.createSVGPoint();
   const xOffset = { NA: 1202 };
   const yOffset = { NA: 512 };
   const rinkType = "NA";
-  const shotColor = "#F06";
+  const shotColor = "#D59E0D";
   let tableData = [];
   let shotCounter = 0;
 
@@ -45,38 +46,63 @@
     }
   }
 
+  function convertUnits(coordinates) {
+    const unitType = unitSelector.options[unitSelector.selectedIndex].value;
+    let converted = {};
+    converted.x = generateX(coordinates.x, unitType);
+    converted.y = generateY(coordinates.y, unitType);
+    converted.id = coordinates.id;
+    return converted;
+  }
+
+  function buildTable() {
+    let convertedData = [];
+    for (var key of Object.keys(tableData)) {
+      convertedData.push(convertUnits(tableData[key]));
+    }
+
+    const table = $("#coord-table");
+    table.removeClass("d-none");
+    table.DataTable({
+      dom: "rt<'mb-3' i><'row'<'col-6' B><'col-6' p>>",
+      destroy: true,
+      data: convertedData,
+      ordering: false,
+      columns: [
+        { title: "X", data: "x" },
+        { title: "Y", data: "y" },
+        { title: "ID", data: "id", visible: false }
+      ],
+      buttons: [
+        {
+          extend: "csvHtml5",
+          text: "Export to CSV"
+        }
+      ],
+      pagingType: "simple"
+    });
+  }
+
+  unitSelector.addEventListener("change", () => {
+    buildTable();
+  });
+
   rink.addEventListener(
     "mousedown",
-    function(evt) {
+    evt => {
       const shotID = `shot-${++shotCounter}`;
       const shotLocation = cursorPoint(evt);
-      const unitSelector = document.getElementById("unit-selector");
-      const unitType = unitSelector.options[unitSelector.selectedIndex].value;
-      const coordinates = {
-        x: generateX(shotLocation.x, unitType),
-        y: generateY(shotLocation.y, unitType),
+      let coordinates = {
+        x: shotLocation.x,
+        y: shotLocation.y,
         id: shotID
       };
 
       // add coordinates to table
       tableData.unshift(coordinates);
-      $("#coord-table").DataTable({
-        dom: "B<'clear'>rt<'clear'>i<'clear'>p",
-        destroy: true,
-        data: tableData,
-        ordering: false,
-        columns: [
-          { title: "X", data: "x" },
-          { title: "Y", data: "y" },
-          { title: "ID", data: "id", visible: false }
-        ],
-        buttons: [
-          {
-            extend: "csvHtml5",
-            text: "Export to CSV"
-          }
-        ]
-      });
+
+      // build table
+      buildTable();
 
       // draw a circle on the rink at shot location
       drawCircle(rink, shotID, shotLocation);
