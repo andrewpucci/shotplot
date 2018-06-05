@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-9">
       <svg version="1.1" id="svg2457" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 2403 1022.995"
         enable-background="new 0 0 2403 1022.995" xml:space="preserve">
@@ -154,18 +154,18 @@
         <path id="path3276-1" fill="none" stroke="#000000" stroke-width="4" d="M2401.5,853.497V169.498
             c0-96-71.998-167.998-167.998-167.998l-2064.004,0C73.498,1.5,1.5,73.498,1.5,169.498v683.999c0,96,71.998,167.998,167.998,167.998
             h2064.004C2329.502,1021.495,2401.5,949.497,2401.5,853.497L2401.5,853.497z" />
-        <path id="path4013" fill="#FFFFFF" d="M1207.55,971.314v-12.047h-12.1v12.047H1207.55z" />
-        <path id="path4011" fill="#FFFFFF" d="M1207.55,895.702v-12.047h-12.1v12.047H1207.55z" />
-        <path id="path4009" fill="#FFFFFF" d="M1207.55,820.046v-12.047h-12.1v12.047H1207.55z" />
-        <path id="path4007" fill="#FFFFFF" d="M1207.55,744.43v-12.047h-12.1v12.047H1207.55z" />
-        <path id="path4005" fill="#FFFFFF" d="M1207.55,668.814v-12.047h-12.1v12.047H1207.55z" />
-        <path id="path4003" fill="#FFFFFF" d="M1207.55,593.157V581.11h-12.1v12.047H1207.55z" />
-        <path id="path3998" fill="#FFFFFF" d="M1207.55,441.925v-12.047h-12.1v12.047H1207.55z" />
-        <path id="path3996" fill="#FFFFFF" d="M1207.55,290.652v-12.047h-12.1v12.047H1207.55z" />
-        <path id="path3994" fill="#FFFFFF" d="M1207.55,139.38v-12.047h-12.1v12.047H1207.55z" />
-        <path id="path3992" fill="#FFFFFF" d="M1207.55,63.764V51.717h-12.1v12.047H1207.55z" />
-        <path id="path3990" fill="#FFFFFF" d="M1207.526,366.221v-12h-12.052v12H1207.526z" />
-        <path id="path3994-1" fill="#FFFFFF" d="M1207.55,215.036v-12.047h-12.1v12.047H1207.55z" />
+        <path id="path4013" fill="#FAFFFF" d="M1207.55,971.314v-12.047h-12.1v12.047H1207.55z" />
+        <path id="path4011" fill="#FAFFFF" d="M1207.55,895.702v-12.047h-12.1v12.047H1207.55z" />
+        <path id="path4009" fill="#FAFFFF" d="M1207.55,820.046v-12.047h-12.1v12.047H1207.55z" />
+        <path id="path4007" fill="#FAFFFF" d="M1207.55,744.43v-12.047h-12.1v12.047H1207.55z" />
+        <path id="path4005" fill="#FAFFFF" d="M1207.55,668.814v-12.047h-12.1v12.047H1207.55z" />
+        <path id="path4003" fill="#FAFFFF" d="M1207.55,593.157V581.11h-12.1v12.047H1207.55z" />
+        <path id="path3998" fill="#FAFFFF" d="M1207.55,441.925v-12.047h-12.1v12.047H1207.55z" />
+        <path id="path3996" fill="#FAFFFF" d="M1207.55,290.652v-12.047h-12.1v12.047H1207.55z" />
+        <path id="path3994" fill="#FAFFFF" d="M1207.55,139.38v-12.047h-12.1v12.047H1207.55z" />
+        <path id="path3992" fill="#FAFFFF" d="M1207.55,63.764V51.717h-12.1v12.047H1207.55z" />
+        <path id="path3990" fill="#FAFFFF" d="M1207.526,366.221v-12h-12.052v12H1207.526z" />
+        <path id="path3994-1" fill="#FAFFFF" d="M1207.55,215.036v-12.047h-12.1v12.047H1207.55z" />
         <g id="g4086-4" transform="translate(0,-511.76905)">
           <path id="path4141-09" fill="none" stroke="#C60C30" stroke-width="2" stroke-linecap="square" d="M172.935,1071.275v-5.976"
           />
@@ -179,18 +179,22 @@
         </g>
       </svg>
     </div>
-    <div class="col-lg-4">
-      <form>
-        <div class="form-group">
-          <label for="unit-selector">Units</label>
-          <select class="custom-select" id="unit-selector">
-            <option value="cm" selected>Centimeters</option>
-            <option value="in">Inches</option>
-            <option value="ft">Feet</option>
-          </select>
+    <div class="col-lg-3">
+      <div class="card">
+        <div class="card-body bg-white">
+          <form>
+            <div class="form-group">
+              <label for="unit-selector">Units</label>
+              <select class="custom-select" id="unit-selector">
+                <option value="cm" selected>Centimeters</option>
+                <option value="in">Inches</option>
+                <option value="ft">Feet</option>
+              </select>
+            </div>
+          </form>
+          <table id="coord-table" class="table d-none"></table>
         </div>
-      </form>
-      <table id="coord-table" class="table"></table>
+      </div>
     </div>
   </div>
 </div>
