@@ -1,5 +1,5 @@
 (function() {
-  const rink = document.getElementById("svg2457");
+  const rink = document.getElementById("rink");
   const unitSelector = document.getElementById("unit-selector");
   const pt = rink.createSVGPoint();
   const xOffset = { NA: 1202 };
