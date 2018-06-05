@@ -36,7 +36,19 @@
 <body class="bg-light">
   {% include nav.html %}
   <main class="py-3">
-    {% if page.content-type == "front" %} {% include front-page.html %} {% else %} {{ content }} {% endif %}
+    {% if page.content-type == "front" %} {% include front-page.html %} {% else %}
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              {{ content }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
   </main>
   <script src="{{'/assets/vendor/jquery.min.js' | relative_url}}"></script>
   <script src="{{'/assets/vendor/popper.min.js' | relative_url}}"></script>
