@@ -7,9 +7,10 @@
 
 # THANKS
 
-    <name>
+    Alyssa Longmuir @alyssastweeting
+    Christopher Michon http://cmichon.com
 
 # TECHNOLOGY COLOPHON
 
     CSS3, HTML5
-    Apache Server Configs, jQuery, Modernizr, Normalize.css
+    jQuery, Bootstrap, DataTables

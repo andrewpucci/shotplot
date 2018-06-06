@@ -24,11 +24,16 @@ github_username:  andrewpucci
 
 # Build settings
 exclude: [node_modules, vendor, Gemfile, Gemfile.lock, Makefile, package.json, yarn.lock]
-sass:
-    load_paths:
-        - _sass
-        - node_modules
-    style: compressed
+plugins:
+  - jekyll-autoprefixer
+
+analytics: GTM-XXXXXXX
+asset_pipeline:
+  bundle: true
+  compress: true
+  output_path: assets
+  display_path: shotplot/assets
+  gzip: false
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
