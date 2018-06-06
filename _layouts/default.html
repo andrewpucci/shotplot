@@ -1,68 +1,69 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{{ page.title }}</title>
+    <meta name="description" content="{{ page.description }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', '{{ site.analytics }}');</script>
+    <link rel="apple-touch-icon" sizes="57x57" href="{{'/assets/favicon/apple-touch-icon-57x57.png' | relative_url}}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{'/assets/favicon/apple-touch-icon-60x60.png' | relative_url}}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{'/assets/favicon/apple-touch-icon-72x72.png' | relative_url}}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{'/assets/favicon/apple-touch-icon-76x76.png' | relative_url}}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{'/assets/favicon/apple-touch-icon-114x114.png' | relative_url}}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{'/assets/favicon/apple-touch-icon-120x120.png' | relative_url}}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{'/assets/favicon/apple-touch-icon-144x144.png' | relative_url}}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{'/assets/favicon/apple-touch-icon-152x152.png' | relative_url}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{'/assets/favicon/apple-touch-icon-180x180.png' | relative_url}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{'/assets/favicon/favicon-32x32.png' | relative_url}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{'/assets/favicon/favicon-16x16.png' | relative_url}}">
+    <link rel="manifest" href="{{'/assets/favicon/site.webmanifest' | relative_url}}">
+    <link rel="mask-icon" href="{{'/assets/favicon/safari-pinned-tab.svg' | relative_url}}" color="#0039a6">
+    <link rel="shortcut icon" href="{{'/assets/favicon/favicon.ico' | relative_url}}">
+    <meta name="apple-mobile-web-app-title" content="ShotPlot">
+    <meta name="application-name" content="ShotPlot">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="{{'/assets/favicon/mstile-144x144.png' | relative_url}}">
+    <meta name="msapplication-config" content="{{'/assets/favicon/browserconfig.xml' | relative_url}}">
+    <meta name="theme-color" content="#faffff">
+    {% css_asset_tag app %}
+      - /_assets/vendor/dataTables.bootstrap4.css
+      - /_assets/vendor/buttons.bootstrap4.min.css
+      - /_assets/main.scss
+    {% endcss_asset_tag %}
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>{{ page.title }}</title>
-  <meta name="description" content="{{ page.description }}">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', '{{ site.analytics }}');</script>
-  <link rel="apple-touch-icon" sizes="57x57" href="{{'/assets/favicon/apple-touch-icon-57x57.png' | relative_url}}">
-  <link rel="apple-touch-icon" sizes="60x60" href="{{'/assets/favicon/apple-touch-icon-60x60.png' | relative_url}}">
-  <link rel="apple-touch-icon" sizes="72x72" href="{{'/assets/favicon/apple-touch-icon-72x72.png' | relative_url}}">
-  <link rel="apple-touch-icon" sizes="76x76" href="{{'/assets/favicon/apple-touch-icon-76x76.png' | relative_url}}">
-  <link rel="apple-touch-icon" sizes="114x114" href="{{'/assets/favicon/apple-touch-icon-114x114.png' | relative_url}}">
-  <link rel="apple-touch-icon" sizes="120x120" href="{{'/assets/favicon/apple-touch-icon-120x120.png' | relative_url}}">
-  <link rel="apple-touch-icon" sizes="144x144" href="{{'/assets/favicon/apple-touch-icon-144x144.png' | relative_url}}">
-  <link rel="apple-touch-icon" sizes="152x152" href="{{'/assets/favicon/apple-touch-icon-152x152.png' | relative_url}}">
-  <link rel="apple-touch-icon" sizes="180x180" href="{{'/assets/favicon/apple-touch-icon-180x180.png' | relative_url}}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{'/assets/favicon/favicon-32x32.png' | relative_url}}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{'/assets/favicon/favicon-16x16.png' | relative_url}}">
-  <link rel="manifest" href="{{'/assets/favicon/site.webmanifest' | relative_url}}">
-  <link rel="mask-icon" href="{{'/assets/favicon/safari-pinned-tab.svg' | relative_url}}" color="#0039a6">
-  <link rel="shortcut icon" href="{{'/assets/favicon/favicon.ico' | relative_url}}">
-  <meta name="apple-mobile-web-app-title" content="ShotPlot">
-  <meta name="application-name" content="ShotPlot">
-  <meta name="msapplication-TileColor" content="#2b5797">
-  <meta name="msapplication-TileImage" content="{{'/assets/favicon/mstile-144x144.png' | relative_url}}">
-  <meta name="msapplication-config" content="{{'/assets/favicon/browserconfig.xml' | relative_url}}">
-  <meta name="theme-color" content="#faffff">
-
-  <link rel="stylesheet" href="{{'/assets/vendor/dataTables.bootstrap4.css' | relative_url}}">
-  <link rel="stylesheet" href="{{'/assets/vendor/buttons.bootstrap4.min.css' | relative_url}}">
-  <link rel="stylesheet" href="{{'/assets/main.css' | relative_url}}">
-</head>
-
-<body class="bg-light">
-  <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id={{ site.analytics }}" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-  </noscript>
-  {% include nav.html %}
-  <main class="py-3">
-    {% if page.content-type == "front" %} {% include front-page.html %} {% else %}
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-body">
-              {{ content }}
+  <body class="bg-light">
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id={{ site.analytics }}" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    {% include nav.html %}
+    <main class="py-3">
+      {% if page.content-type == "front" %} {% include front-page.html %} {% else %}
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                {{ content }}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    {% endif %}
-  </main>
-  <script src="{{'/assets/vendor/jquery.min.js' | relative_url}}"></script>
-  <script src="{{'/assets/vendor/popper.min.js' | relative_url}}"></script>
-  <script src="{{'/assets/vendor/bootstrap.min.js' | relative_url}}"></script>
-  <script src="{{'/assets/vendor/jquery.dataTables.js' | relative_url}}"></script>
-  <script src="{{'/assets/vendor/dataTables.bootstrap4.js' | relative_url}}"></script>
-  <script src="{{'/assets/vendor/dataTables.buttons.min.js' | relative_url}}"></script>
-  <script src="{{'/assets/vendor/buttons.html5.min.js' | relative_url}}"></script>
-  <script src="{{'/assets/vendor/buttons.bootstrap4.min.js' | relative_url}}"></script>
-  <script src="{{'/assets/main.js' | relative_url}}"></script>
-</body>
-
+      {% endif %}
+    </main>
+    {% javascript_asset_tag app %}
+      - /_assets/vendor/jquery.min.js
+      - /_assets/vendor/popper.min.js
+      - /_assets/vendor/bootstrap.min.js
+      - /_assets/vendor/jquery.dataTables.js
+      - /_assets/vendor/dataTables.bootstrap4.js
+      - /_assets/vendor/dataTables.buttons.min.js
+      - /_assets/vendor/buttons.html5.min.js
+      - /_assets/vendor/buttons.bootstrap4.min.js
+      - /_assets/main.js
+    {% endjavascript_asset_tag %}
+  </body>
 </html>

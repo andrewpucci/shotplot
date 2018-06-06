@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 BUNDLE := bundle
 YARN := yarn
-VENDOR_DIR = assets/vendor/
+VENDOR_DIR = _assets/vendor/
 JEKYLL := $(BUNDLE) exec jekyll
 
 PROJECT_DEPS := Gemfile package.json

@@ -9,4 +9,5 @@ gem "jekyll", "~> 3.8"
 
 group :jekyll_plugins do
   gem "jekyll-autoprefixer"
+  gem "jekyll_asset_pipeline"
 end
