@@ -1,4 +1,4 @@
-(function() {
+(() => {
   const rink = document.getElementById("rink");
   const unitSelector = document.getElementById("unit-selector");
   const pt = rink.createSVGPoint();
@@ -67,17 +67,18 @@
       dom: "rt<'mb-3' i><'row'<'col-6' B><'col-6' p>>",
       destroy: true,
       data: convertedData,
-      ordering: false,
+      ordering: true,
+      order: [0, 'desc'],
       columns: [
+        { title: "Shot", data: "id" },
         { title: "X", data: "x" },
         { title: "Y", data: "y" },
-        { title: "ID", data: "id", visible: false }
       ],
       buttons: [
         {
           extend: "csvHtml5",
-          text: "Export to CSV"
-        }
+          text: "Export to CSV",
+        },
       ],
       pagingType: "simple"
     });
@@ -90,7 +91,7 @@
   rink.addEventListener(
     "mousedown",
     evt => {
-      const shotID = `shot-${++shotCounter}`;
+      const shotID = ++shotCounter;
       const shotLocation = cursorPoint(evt);
       let coordinates = {
         x: shotLocation.x,
