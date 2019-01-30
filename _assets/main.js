@@ -102,6 +102,16 @@
     buildTable();
   });
 
+  rink.addEventListener("mouseover", function(evt) {
+    this.setAttribute("data-title", this.getElementsByTagName("title")[0].innerHTML);
+    this.getElementsByTagName("title")[0].innerHTML = "";
+  });
+
+  rink.addEventListener("mouseout", function(evt) {
+    this.getElementsByTagName("title")[0].innerHTML = this.getAttribute("data-title");
+    this.removeAttribute("data-title");
+  });
+
   rink.addEventListener(
     "mousedown",
     evt => {
