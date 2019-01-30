@@ -18,11 +18,25 @@
   function drawCircle(elem, id, shotLocation) {
     const ns = "http://www.w3.org/2000/svg";
     const circle = document.createElementNS(ns, "circle");
-    circle.setAttributeNS(null, "id", id);
-    circle.setAttributeNS(null, "cx", shotLocation.x);
-    circle.setAttributeNS(null, "cy", shotLocation.y);
-    circle.setAttributeNS(null, "r", 25);
-    circle.setAttributeNS(null, "fill", shotColor);
+    circle.setAttribute("id", id);
+    circle.classList.add("shot");
+    circle.setAttribute("cx", shotLocation.x);
+    circle.setAttribute("cy", shotLocation.y);
+    circle.setAttribute("r", 45);
+    circle.setAttribute("fill", shotColor);
+    circle.addEventListener("mouseover", function(evt) {
+      this.setAttribute("r", 45);
+      this.parentElement.querySelectorAll(".shot").forEach((item) => {
+        item.classList.add("faded");
+      });
+      this.classList.remove("faded");
+    });
+    circle.addEventListener("mouseout", function(evt) {
+      this.setAttributeNS(null, "r", 25);
+      this.parentElement.querySelectorAll(".shot").forEach((item) => {
+        item.classList.remove("faded");
+      });
+    });
     elem.appendChild(circle);
   }
 
