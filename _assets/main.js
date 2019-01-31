@@ -103,6 +103,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     const table = $("#coord-table");
     table.removeClass("d-none");
+    document.getElementById("unit-selector").classList.add("mb-3");
     table.DataTable({
       dom: "rt<'mb-3' i><'row'<'col-6' B><'col-6' p>>",
       destroy: true,
