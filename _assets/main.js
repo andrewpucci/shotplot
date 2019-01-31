@@ -1,4 +1,4 @@
-(() => {
+document.addEventListener("DOMContentLoaded", (event) => {
   const rink = document.getElementById("rink");
   const unitSelector = document.getElementById("unit-selector");
   const pt = rink.createSVGPoint();
@@ -30,6 +30,14 @@
     });
   }
 
+  function emphasizeRow(row) {
+    row.classList.add("emphasized-row");
+  }
+
+  function deemphasizeRow(row) {
+    row.classList.remove("emphasized-row");
+  }
+
   function drawCircle(elem, id, shotLocation) {
     const ns = "http://www.w3.org/2000/svg";
     const circle = document.createElementNS(ns, "circle");
@@ -41,9 +49,21 @@
     circle.setAttribute("fill", shotColor);
     circle.addEventListener("mouseover", (event) => {
       emphasizeShot(event.currentTarget);
+      try {
+        emphasizeRow(document.getElementById(`row-${id}`));
+      }
+      catch(error) {
+        console.error("Row cannot be highlighted because shot is not listed in current table view.");
+      }
     });
     circle.addEventListener("mouseout", (event) => {
       deemphasizeShot(event.currentTarget);
+      try {
+        deemphasizeRow(document.getElementById(`row-${id}`));
+      }
+      catch(error) {
+        console.error("Row cannot be highlighted because shot is not listed in current table view.");
+      }
     });
     elem.appendChild(circle);
   }
@@ -94,6 +114,17 @@
         { title: "X", data: "x" },
         { title: "Y", data: "y" },
       ],
+      rowId: (convertedData) => { return `row-${convertedData.id}`},
+      createdRow: function(row, data, dataIndex) {
+        row.addEventListener("mouseover", (event) => {
+          emphasizeShot(document.getElementById(`shot-${row.children[0].innerHTML}`));
+          emphasizeRow(row);
+        });
+        row.addEventListener("mouseout", (event) => {
+          deemphasizeShot(document.getElementById(`shot-${row.children[0].innerHTML}`));
+          deemphasizeRow(row);
+        });
+      },
       buttons: [
         {
           extend: "csvHtml5",
@@ -102,52 +133,40 @@
       ],
       pagingType: "simple"
     });
-
-    const rows = table[0].querySelectorAll("tbody tr");
-    for (let i = 0; i < rows.length; i++) {
-      rows[i].addEventListener("mouseover", (event) => {
-        emphasizeShot(document.getElementById(`shot-${rows[i].children[0].innerHTML}`));
-      });
-      rows[i].addEventListener("mouseout", (event) => {
-        deemphasizeShot(document.getElementById(`shot-${rows[i].children[0].innerHTML}`));
-      })
-    }
   }
 
-  unitSelector.addEventListener("change", () => {
+  unitSelector.addEventListener("change", buildTable);
+
+  // Hide svg title so browser tooltip is not shown on hover
+  rink.addEventListener("mouseover", (event) => {
+    const svg = event.currentTarget;
+    svg.setAttribute("data-title", svg.getElementsByTagName("title")[0].innerHTML);
+    svg.getElementsByTagName("title")[0].innerHTML = "";
+  });
+
+  // Replace svg title
+  rink.addEventListener("mouseout", (event) => {
+    const svg = event.currentTarget;
+    svg.getElementsByTagName("title")[0].innerHTML = svg.getAttribute("data-title");
+    svg.removeAttribute("data-title");
+  });
+
+  rink.addEventListener("mousedown", (event) => {
+    const shotID = ++shotCounter;
+    const shotLocation = cursorPoint(event);
+    let coordinates = {
+      x: shotLocation.x,
+      y: shotLocation.y,
+      id: shotID
+    };
+
+    // add coordinates to table
+    tableData.unshift(coordinates);
+
+    // build table
     buildTable();
-  });
 
-  rink.addEventListener("mouseover", function(event) {
-    this.setAttribute("data-title", this.getElementsByTagName("title")[0].innerHTML);
-    this.getElementsByTagName("title")[0].innerHTML = "";
-  });
-
-  rink.addEventListener("mouseout", function(event) {
-    this.getElementsByTagName("title")[0].innerHTML = this.getAttribute("data-title");
-    this.removeAttribute("data-title");
-  });
-
-  rink.addEventListener(
-    "mousedown",
-    event => {
-      const shotID = ++shotCounter;
-      const shotLocation = cursorPoint(event);
-      let coordinates = {
-        x: shotLocation.x,
-        y: shotLocation.y,
-        id: shotID
-      };
-
-      // add coordinates to table
-      tableData.unshift(coordinates);
-
-      // build table
-      buildTable();
-
-      // draw a circle on the rink at shot location
-      drawCircle(rink, shotID, shotLocation);
-    },
-    false
-  );
-})();
+    // draw a circle on the rink at shot location
+    drawCircle(rink, shotID, shotLocation);
+  }, false);
+});
