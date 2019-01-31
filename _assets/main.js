@@ -118,11 +118,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
       rowId: (convertedData) => { return `row-${convertedData.id}`},
       createdRow: function(row, data, dataIndex) {
         row.addEventListener("mouseover", (event) => {
-          emphasizeShot(document.getElementById(`shot-${row.children[0].innerHTML}`));
+          emphasizeShot(document.getElementById(`shot-${data.id}`));
           emphasizeRow(row);
         });
         row.addEventListener("mouseout", (event) => {
-          deemphasizeShot(document.getElementById(`shot-${row.children[0].innerHTML}`));
+          deemphasizeShot(document.getElementById(`shot-${data.id}`));
           deemphasizeRow(row);
         });
       },
