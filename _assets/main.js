@@ -15,27 +15,35 @@
     return pt.matrixTransform(rink.getScreenCTM().inverse());
   }
 
+  function emphasizeShot(shot) {
+    shot.setAttribute("r", 45);
+    shot.parentElement.querySelectorAll(".shot").forEach((item) => {
+      item.classList.add("faded");
+    });
+    shot.classList.remove("faded");
+  }
+
+  function deemphasizeShot(shot) {
+    shot.setAttribute("r", 25);
+    shot.parentElement.querySelectorAll(".shot").forEach((item) => {
+      item.classList.remove("faded");
+    });
+  }
+
   function drawCircle(elem, id, shotLocation) {
     const ns = "http://www.w3.org/2000/svg";
     const circle = document.createElementNS(ns, "circle");
-    circle.setAttribute("id", id);
+    circle.setAttribute("id", `shot-${id}`);
     circle.classList.add("shot");
     circle.setAttribute("cx", shotLocation.x);
     circle.setAttribute("cy", shotLocation.y);
     circle.setAttribute("r", 45);
     circle.setAttribute("fill", shotColor);
-    circle.addEventListener("mouseover", function(evt) {
-      this.setAttribute("r", 45);
-      this.parentElement.querySelectorAll(".shot").forEach((item) => {
-        item.classList.add("faded");
-      });
-      this.classList.remove("faded");
+    circle.addEventListener("mouseover", (event) => {
+      emphasizeShot(event.currentTarget);
     });
-    circle.addEventListener("mouseout", function(evt) {
-      this.setAttributeNS(null, "r", 25);
-      this.parentElement.querySelectorAll(".shot").forEach((item) => {
-        item.classList.remove("faded");
-      });
+    circle.addEventListener("mouseout", (event) => {
+      deemphasizeShot(event.currentTarget);
     });
     elem.appendChild(circle);
   }
@@ -96,6 +104,16 @@
       ],
       pagingType: "simple"
     });
+
+    const rows = table[0].querySelectorAll("tbody tr");
+    for (let i = 0; i < rows.length; i++) {
+      rows[i].addEventListener("mouseover", (event) => {
+        emphasizeShot(document.getElementById(`shot-${rows[i].children[0].innerHTML}`));
+      });
+      rows[i].addEventListener("mouseout", (event) => {
+        deemphasizeShot(document.getElementById(`shot-${rows[i].children[0].innerHTML}`));
+      })
+    }
   }
 
   unitSelector.addEventListener("change", () => {
