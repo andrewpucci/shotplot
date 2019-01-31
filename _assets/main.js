@@ -9,9 +9,9 @@
   let tableData = [];
   let shotCounter = 0;
 
-  function cursorPoint(evt) {
-    pt.x = evt.clientX;
-    pt.y = evt.clientY;
+  function cursorPoint(event) {
+    pt.x = event.clientX;
+    pt.y = event.clientY;
     return pt.matrixTransform(rink.getScreenCTM().inverse());
   }
 
@@ -49,23 +49,21 @@
   }
 
   function generateX(num, unitType) {
-    if (unitType === "cm") {
-      return Math.round((num - xOffset.NA) * 2.54, 1);
-    } else if (unitType === "in") {
-      return Math.round(num - xOffset.NA, 1);
-    } else if (unitType === "ft") {
-      return Math.round((num - xOffset.NA) / 12, 1);
-    }
+    const formulas = {
+      "cm": Math.round((num - xOffset.NA) * 2.54, 1),
+      "in": Math.round(num - xOffset.NA, 1),
+      "ft": Math.round((num - xOffset.NA) / 12, 1)
+    };
+    return formulas[unitType];
   }
 
   function generateY(num, unitType) {
-    if (unitType === "cm") {
-      return Math.round(-(num - yOffset.NA) * 2.54, 1);
-    } else if (unitType === "in") {
-      return Math.round(-(num - yOffset.NA), 1);
-    } else if (unitType === "ft") {
-      return Math.round(-(num - yOffset.NA) / 12, 1);
+    const formulas = {
+      "cm": Math.round(-(num - yOffset.NA) * 2.54, 1),
+      "in": Math.round(-(num - yOffset.NA), 1),
+      "ft": Math.round(-(num - yOffset.NA) / 12, 1)
     }
+    return formulas[unitType];
   }
 
   function convertUnits(coordinates) {
@@ -120,21 +118,21 @@
     buildTable();
   });
 
-  rink.addEventListener("mouseover", function(evt) {
+  rink.addEventListener("mouseover", function(event) {
     this.setAttribute("data-title", this.getElementsByTagName("title")[0].innerHTML);
     this.getElementsByTagName("title")[0].innerHTML = "";
   });
 
-  rink.addEventListener("mouseout", function(evt) {
+  rink.addEventListener("mouseout", function(event) {
     this.getElementsByTagName("title")[0].innerHTML = this.getAttribute("data-title");
     this.removeAttribute("data-title");
   });
 
   rink.addEventListener(
     "mousedown",
-    evt => {
+    event => {
       const shotID = ++shotCounter;
-      const shotLocation = cursorPoint(evt);
+      const shotLocation = cursorPoint(event);
       let coordinates = {
         x: shotLocation.x,
         y: shotLocation.y,
