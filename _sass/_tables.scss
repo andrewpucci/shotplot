@@ -5,3 +5,8 @@ table.dataTable {
 #coord-table_wrapper {
   padding: 0;
 }
+
+.emphasized-row {
+  background-color: lighten(#D59E0D, 40%);
+  transition: background-color 0.2s ease-in;
+}
