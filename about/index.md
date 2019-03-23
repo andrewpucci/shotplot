@@ -23,4 +23,4 @@ If you have any ideas on how to improve ShotPlot, or notice any bugs, feel free 
 
 ## Attribution
 
-The SVG for the hockey rink was adapted from [Wikipedia](https://commons.wikimedia.org/wiki/File:NHL_Hockey_Rink.svg).
+The SVG for the North American hockey rink was adapted from [Wikipedia](https://commons.wikimedia.org/wiki/File:NHL_Hockey_Rink.svg). The SVG for the International hockey rink was custom made using the [rink dimensions](http://stats.iihf.com/hockey/rules/img/sec1.pdf) specified by the International Ice Hockey Federation.
