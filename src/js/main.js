@@ -169,44 +169,52 @@ document.addEventListener('DOMContentLoaded', () => {
     ajax.open('GET', rinkURL[rinkType], true);
     ajax.send();
     ajax.onload = () => {
-      const rinkContainer = document.getElementById('rink');
-      rinkContainer.innerHTML = ajax.responseText;
-      const rink = rinkContainer.getElementsByTagName('svg')[0];
+      if (ajax.status === 404) {
+        const rinkContainer = document.getElementById('rink');
+        const alert = document.createElement('div');
+        alert.classList.add('alert', 'alert-danger');
+        alert.appendChild(document.createTextNode('There was an error loading the rink. Please try again later.'));
+        rinkContainer.appendChild(alert);
+      } else {
+        const rinkContainer = document.getElementById('rink');
+        rinkContainer.innerHTML = ajax.responseText;
+        const rink = rinkContainer.getElementsByTagName('svg')[0];
 
-      cleanTable(rinkType);
+        cleanTable(rinkType);
 
-      // Hide svg title so browser tooltip is not shown on hover
-      rink.addEventListener('mouseover', (event) => {
-        const svg = event.currentTarget;
-        svg.setAttribute('data-title', svg.getElementsByTagName('title')[0].innerHTML);
-        svg.getElementsByTagName('title')[0].innerHTML = '';
-      });
+        // Hide svg title so browser tooltip is not shown on hover
+        rink.addEventListener('mouseover', (event) => {
+          const svg = event.currentTarget;
+          svg.setAttribute('data-title', svg.getElementsByTagName('title')[0].innerHTML);
+          svg.getElementsByTagName('title')[0].innerHTML = '';
+        });
 
-      // Replace svg title
-      rink.addEventListener('mouseout', (event) => {
-        const svg = event.currentTarget;
-        svg.getElementsByTagName('title')[0].innerHTML = svg.getAttribute('data-title');
-        svg.removeAttribute('data-title');
-      });
+        // Replace svg title
+        rink.addEventListener('mouseout', (event) => {
+          const svg = event.currentTarget;
+          svg.getElementsByTagName('title')[0].innerHTML = svg.getAttribute('data-title');
+          svg.removeAttribute('data-title');
+        });
 
-      rink.addEventListener('mousedown', (event) => {
-        shotCounter += 1;
-        const shotLocation = cursorPoint(event);
-        const coordinates = {
-          x: shotLocation.x,
-          y: shotLocation.y,
-          id: shotCounter,
-        };
+        rink.addEventListener('mousedown', (event) => {
+          shotCounter += 1;
+          const shotLocation = cursorPoint(event);
+          const coordinates = {
+            x: shotLocation.x,
+            y: shotLocation.y,
+            id: shotCounter,
+          };
 
-        // add coordinates to table
-        tableData.unshift(coordinates);
+          // add coordinates to table
+          tableData.unshift(coordinates);
 
-        // build table
-        buildTable(rinkType);
+          // build table
+          buildTable(rinkType);
 
-        // draw a circle on the rink at shot location
-        drawCircle(rink, shotCounter, shotLocation, rinkType);
-      }, false);
+          // draw a circle on the rink at shot location
+          drawCircle(rink, shotCounter, shotLocation, rinkType);
+        }, false);
+      }
     };
   };
 
