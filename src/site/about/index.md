@@ -1,6 +1,8 @@
-# ShotPlot
-
-A tool used to obtain spacial coordinates based on an ice hockey rink.
+---
+layout: layouts/container.njk
+title: About ShotPlot
+description: What is ShotPlot and why does it exist?
+---
 
 ## What is ShotPlot?
 

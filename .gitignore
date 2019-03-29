@@ -1,6 +1,6 @@
 node_modules
-vendor
-_site
-.bundle/config
-.jekyll-metadata
-.sass-cache
+dist
+.env
+yarn-error.log
+src/site/assets/js/*
+src/site/assets/css/*

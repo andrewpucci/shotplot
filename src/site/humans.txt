@@ -1,0 +1,13 @@
+/* TEAM */
+  Andrew Pucci -- Designer & Developer
+  Twitter: @AndrewRPucci
+  Website: https://www.andrewpucci.com
+
+/* THANKS */
+  Alyssa Longmuir -- @alyssastweeting
+  Christopher Michon -- http://cmichon.com
+
+/* SITE */
+  Standards: CSS3, HTML5
+  Components: 11ty, Gulp, Bootstrap, DataTables
+  Software: VS Code, GitHub Desktop

@@ -1,0 +1,15 @@
+
+{
+  "environments": [
+    {
+      "name": "development",
+      "aliases": [ "dev", "local" ]
+    },
+    {
+      "name": "production",
+      "aliases": [ "prod", "live" ]
+    }
+  ],
+
+  "default": "development"
+}
