@@ -1,5 +1,6 @@
-module.exports = function(config) {
+const cacheBuster = require('@mightyplow/eleventy-plugin-cache-buster');
 
+module.exports = function(config) {
   // Layout aliases can make templates more portable
   config.addLayoutAlias('default', 'layouts/base.njk');
 
@@ -8,6 +9,14 @@ module.exports = function(config) {
 
   // minify the html output
   config.addTransform("htmlmin", require("./src/utils/minify-html.js").default);
+
+  // fingerprint css and js files
+  config.addPlugin(cacheBuster({
+    outputDirectory: 'dist',
+    createResourceHash(outputDirectoy, url, target) {
+      return Date.now();
+    }
+  }));
 
   // pass some assets right through
   config.addPassthroughCopy("./src/site/assets");
