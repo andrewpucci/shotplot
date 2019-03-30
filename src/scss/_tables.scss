@@ -1,0 +1,10 @@
+/* stylelint-disable-next-line selector-no-qualifying-type */
+table.dataTable {
+  /* stylelint-disable-next-line declaration-no-important */
+  border-collapse: collapse !important;
+}
+
+.emphasized-row {
+  background-color: lighten(#d59e0d, 40%);
+  transition: background-color 0.2s ease-in;
+}
