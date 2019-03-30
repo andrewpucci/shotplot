@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const rinkURL = { NA: '/assets/img/na-rink.svg', IIHF: '/assets/img/iihf-rink.svg' };
+  const rinkURL = { NA: 'assets/img/na-rink.svg', IIHF: 'assets/img/iihf-rink.svg' };
   const unitSelector = document.getElementById('unit-selector');
   const xOffset = { NA: 1202, IIHF: 3005 };
   const yOffset = { NA: 512, IIHF: 1504.5 };
@@ -165,8 +165,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('unit-selector').value = defaultUnits[rinkType];
 
+    const absRinkURL = new URL(rinkURL[rinkType], window.location.href);
+
     const ajax = new XMLHttpRequest();
-    ajax.open('GET', rinkURL[rinkType], true);
+    ajax.open('GET', absRinkURL.href, true);
     ajax.send();
     ajax.onload = () => {
       if (ajax.status === 404) {
