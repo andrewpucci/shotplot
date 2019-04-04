@@ -12,7 +12,7 @@ If you have any ideas on how to improve shotplot, or notice any bugs, feel free 
 
 ## Running Locally
 
-If you'd like to take shotplot for a spin, head over to [andrewpucci.com/shotplot](https://www.andrewpucci.com/shotplot?ref=github).
+If you'd like to take shotplot for a spin, head over to [shotplot.app](https://www.shotplot.app/?ref=github).
 
 Feel like playing around with the code?
 1.  Clone this repo
