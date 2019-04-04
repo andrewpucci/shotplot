@@ -6,7 +6,7 @@
   "license": "GPL-3.0",
   "scripts": {
     "dev": "gulp clean && NODE_ENV=development gulp build && (ELEVENTY_ENV=development eleventy --serve & NODE_ENV=development gulp watch)",
-    "prod": "gulp clean && NODE_ENV=production gulp build && ELEVENTY_ENV=production eleventy --pathprefix=shotplot",
+    "prod": "gulp clean && NODE_ENV=production gulp build && ELEVENTY_ENV=production eleventy",
     "build": "gulp clean && NODE_ENV=development gulp build && ELEVENTY_ENV=development eleventy",
     "clean": "gulp clean"
   },
