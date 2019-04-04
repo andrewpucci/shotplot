@@ -1,0 +1,9 @@
+[build]
+  command = "yarn prod"
+  publish = "dist"
+
+[context.deploy-preview.environment]
+  GTMID = "GTM-XXXXXXX"
+
+[context.branch-deploy.environment]
+  GTMID = "GTM-XXXXXXX"
