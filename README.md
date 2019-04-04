@@ -8,7 +8,7 @@ This is a project based on an off-hand remark from [Alyssa Longmuir](https://twi
 
 ## Ideas and Bugs
 
-If you have any ideas on how to improve ShotPlot, or notice any bugs, feel free to [submit an issue](https://github.com/andrewpucci/shotplot/issues) on GitHub and I'll try to get to it as soon as possible. Pull requests are also welcome!
+If you have any ideas on how to improve shotplot, or notice any bugs, feel free to [submit an issue](https://github.com/andrewpucci/shotplot/issues) on GitHub and I'll try to get to it as soon as possible. Pull requests are also welcome!
 
 ## Running Locally
 
