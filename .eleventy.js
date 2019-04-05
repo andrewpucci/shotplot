@@ -8,7 +8,7 @@ module.exports = function(config) {
   config.addFilter("squash", require("./src/filters/squash.js") );
 
   // minify the html output
-  config.addTransform("htmlmin", require("./src/utils/minify-html.js").default);
+  config.addTransform("htmlmin", require("./src/utils/minify-html.js"));
 
   // fingerprint css and js files
   config.addPlugin(cacheBuster({
@@ -26,6 +26,7 @@ module.exports = function(config) {
   return {
     dir: {
       input: "src/site",
+      layouts: "_layouts",
       output: "dist",
       data: '_data'
     },
