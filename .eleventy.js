@@ -13,7 +13,6 @@ module.exports = function(config) {
   return {
     dir: {
       input: "src/site",
-      layouts: "_layouts",
       output: "dist",
       data: '_data'
     },

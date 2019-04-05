@@ -1,5 +1,5 @@
 ---
-layout: container.njk
+layout: layouts/container.njk
 title: About shotplot
 description: What is shotplot and why does it exist?
 ---
