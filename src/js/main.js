@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function buildTable(rinkType) {
     const convertedData = [];
-    tableData.every(row => convertedData.push(convertUnits(row, rinkType)));
+    tableData.every((row) => convertedData.push(convertUnits(row, rinkType)));
 
     const table = $('#coord-table');
     table.removeClass('d-none');
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: 'X', data: 'x' },
         { title: 'Y', data: 'y' },
       ],
-      rowId: row => `row-${row.id}`,
+      rowId: (row) => `row-${row.id}`,
       createdRow(row, data) {
         row.addEventListener('mouseover', () => {
           emphasizeShot(document.getElementById(`shot-${data.id}`), rinkType);
@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const rinkSelector = document.getElementById('rink-selector');
-  rinkSelector.addEventListener('change', e => setupRink(e.currentTarget));
+  rinkSelector.addEventListener('change', (e) => setupRink(e.currentTarget));
   unitSelector.addEventListener('change', () => buildTable(rinkSelector.options[rinkSelector.selectedIndex].value));
 
   setupRink(rinkSelector);
