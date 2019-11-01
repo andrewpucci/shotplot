@@ -22,4 +22,6 @@ If you have any ideas on how to improve shotplot, or notice any bugs, feel free 
 
 ## Attribution
 
-The SVG for the North American hockey rink was adapted from [Wikipedia](https://commons.wikimedia.org/wiki/File:NHL_Hockey_Rink.svg). The SVG for the International hockey rink was custom made using the [rink dimensions](http://stats.iihf.com/hockey/rules/img/sec1.pdf) specified by the International Ice Hockey Federation.
+* The SVG for the North American hockey rink was adapted from [Wikipedia](https://commons.wikimedia.org/wiki/File:NHL_Hockey_Rink.svg)
+* The SVG for the International hockey rink was custom made using the [rink dimensions](http://stats.iihf.com/hockey/rules/img/sec1.pdf) specified by the International Ice Hockey Federation.
+* The Twitter logo is from FontAwesome and is used under the [CC BY 4.0 License](https://fontawesome.com/license/free)
