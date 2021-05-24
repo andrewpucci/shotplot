@@ -7,3 +7,8 @@
 
 [context.branch-deploy.environment]
   GTMID = "GTM-XXXXXXX"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Permissions-Policy = "interest-cohort=()"
