@@ -1,4 +1,3 @@
-
 /**
  * Make a search index string by removing duplicated words
  * and removing less useful, common short words
