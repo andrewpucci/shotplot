@@ -42,7 +42,7 @@
     "gulp-sourcemaps": "^3.0.0",
     "gulp-terser": "^2.1.0",
     "html-minifier": "^4.0.0",
-    "postcss": "^8.0.0",
+    "postcss": "^8.4.31",
     "require-dir": "^1.2.0",
     "sass": "^1.54.9",
     "stylelint": "^15.10.1",
