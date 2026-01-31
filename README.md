@@ -22,11 +22,16 @@ nvm use
 ```
 3.  Install dependencies
 ```
-yarn install
+npm install
 ```
 4.  Run development mode
 ```
-yarn dev
+npm run dev
+```
+
+5.  Build production output
+```
+npm run prod
 ```
 
 ### Customization
