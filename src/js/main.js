@@ -1,3 +1,7 @@
+import 'bootstrap';
+import { TabulatorFull as Tabulator } from 'tabulator-tables';
+import 'tabulator-tables/dist/css/tabulator_bootstrap5.min.css';
+
 document.addEventListener('DOMContentLoaded', () => {
   const rinkURL = { NA: 'assets/img/na-rink.svg', IIHF: 'assets/img/iihf-rink.svg' };
   const unitSelector = document.getElementById('unit-selector');
@@ -9,6 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const shotColor = '#D59E0D';
   let tableData = [];
   let shotCounter = 0;
+  let coordTable = null;
+  let currentRinkType = 'NA';
 
   function cursorPoint(event) {
     const pt = event.currentTarget.createSVGPoint();
@@ -40,6 +46,20 @@ document.addEventListener('DOMContentLoaded', () => {
     row.classList.remove('emphasized-row');
   }
 
+  function emphasizeRowById(id) {
+    if (!coordTable) return;
+    const row = coordTable.getRow(id);
+    if (!row) return;
+    emphasizeRow(row.getElement());
+  }
+
+  function deemphasizeRowById(id) {
+    if (!coordTable) return;
+    const row = coordTable.getRow(id);
+    if (!row) return;
+    deemphasizeRow(row.getElement());
+  }
+
   function drawCircle(elem, id, shotLocation, rinkType) {
     const ns = 'http://www.w3.org/2000/svg';
     const circle = document.createElementNS(ns, 'circle');
@@ -51,21 +71,11 @@ document.addEventListener('DOMContentLoaded', () => {
     circle.setAttribute('fill', shotColor);
     circle.addEventListener('mouseover', (event) => {
       emphasizeShot(event.currentTarget, rinkType);
-      try {
-        emphasizeRow(document.getElementById(`row-${id}`));
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('Row cannot be highlighted because shot is not listed in current table view.');
-      }
+      emphasizeRowById(id);
     });
     circle.addEventListener('mouseout', (event) => {
       deemphasizeShot(event.currentTarget, rinkType);
-      try {
-        deemphasizeRow(document.getElementById(`row-${id}`));
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('Row cannot be highlighted because shot is not listed in current table view.');
-      }
+      deemphasizeRowById(id);
     });
     elem.appendChild(circle);
   }
@@ -116,42 +126,73 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function buildTable(rinkType) {
+    currentRinkType = rinkType;
     const convertedData = [];
     tableData.every((row) => convertedData.push(convertUnits(row, rinkType)));
 
-    const table = $('#coord-table');
-    table.removeClass('d-none');
+    const tableContainer = document.getElementById('coord-table');
+    tableContainer.classList.remove('d-none');
     document.getElementById('unit-selector').classList.add('mb-3');
-    table.DataTable({
-      dom: "rt<'mb-3' i><'row'<'col-6' B><'col-6' p>>",
-      destroy: true,
-      data: convertedData,
-      ordering: true,
-      order: [0, 'desc'],
-      columns: [
-        { title: 'Shot', data: 'id' },
-        { title: 'X', data: 'x' },
-        { title: 'Y', data: 'y' },
-      ],
-      rowId: (row) => `row-${row.id}`,
-      createdRow(row, data) {
-        row.addEventListener('mouseover', () => {
-          emphasizeShot(document.getElementById(`shot-${data.id}`), rinkType);
-          emphasizeRow(row);
-        });
-        row.addEventListener('mouseout', () => {
-          deemphasizeShot(document.getElementById(`shot-${data.id}`), rinkType);
-          deemphasizeRow(row);
-        });
-      },
-      buttons: [
-        {
-          extend: 'csvHtml5',
-          text: 'Export to CSV',
-        },
-      ],
-      pagingType: 'simple',
-    });
+
+    if (!coordTable) {
+      tableContainer.replaceChildren();
+
+      const buttonRow = document.createElement('div');
+      buttonRow.classList.add('d-flex', 'justify-content-end', 'mb-2');
+
+      const exportBtn = document.createElement('button');
+      exportBtn.type = 'button';
+      exportBtn.classList.add('btn', 'btn-sm', 'btn-outline-secondary');
+      exportBtn.textContent = 'Export to CSV';
+      buttonRow.appendChild(exportBtn);
+
+      const tableEl = document.createElement('div');
+      tableEl.id = 'coord-table-inner';
+      tableContainer.appendChild(buttonRow);
+      tableContainer.appendChild(tableEl);
+
+      coordTable = new Tabulator(tableEl, {
+        index: 'id',
+        data: convertedData,
+        layout: 'fitColumns',
+        reactiveData: false,
+        pagination: true,
+        paginationMode: 'local',
+        paginationSize: 10,
+        paginationButtonCount: 3,
+        initialSort: [{ column: 'id', dir: 'desc' }],
+        columns: [
+          { title: 'Shot', field: 'id', sorter: 'number', headerSort: true },
+          { title: 'X', field: 'x', sorter: 'number', headerSort: true },
+          { title: 'Y', field: 'y', sorter: 'number', headerSort: true },
+        ],
+      });
+
+      coordTable.on('rowMouseOver', (e, row) => {
+        const data = row.getData();
+        const shot = document.getElementById(`shot-${data.id}`);
+        if (shot) {
+          emphasizeShot(shot, currentRinkType);
+        }
+        emphasizeRow(row.getElement());
+      });
+
+      coordTable.on('rowMouseOut', (e, row) => {
+        const data = row.getData();
+        const shot = document.getElementById(`shot-${data.id}`);
+        if (shot) {
+          deemphasizeShot(shot, currentRinkType);
+        }
+        deemphasizeRow(row.getElement());
+      });
+
+      exportBtn.addEventListener('click', () => {
+        coordTable.download('csv', 'shotplot.csv');
+      });
+    } else {
+      coordTable.setData(convertedData);
+      coordTable.setSort('id', 'desc');
+    }
   }
 
   const cleanTable = (rinkType) => {
