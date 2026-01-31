@@ -1,6 +1,6 @@
 {
   "name": "shotplot",
-  "version": "2.0.0",
+  "version": "4.0.0",
   "description": "A tool used to obtain spacial coordinates based on an ice hockey rink",
   "author": "Andrew Pucci",
   "license": "GPL-3.0",
