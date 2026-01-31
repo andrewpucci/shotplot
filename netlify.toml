@@ -1,6 +1,9 @@
 [build]
-  command = "yarn prod"
+  command = "npm ci && npm run prod"
   publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
 
 [context.deploy-preview.environment]
   GTMID = "GTM-XXXXXXX"
