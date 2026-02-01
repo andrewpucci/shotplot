@@ -6,7 +6,7 @@
   "license": "GPL-3.0",
   "scripts": {
     "browserslist:update": "npx update-browserslist-db@latest",
-    "clean": "rm -rf dist src/site/assets/js/* src/site/assets/css/*",
+    "clean": "rm -rf dist",
     "assets:build": "vite build --mode production",
     "assets:build:dev": "vite build --mode development",
     "assets:watch": "vite build --watch --mode development",

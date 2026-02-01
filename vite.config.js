@@ -2,6 +2,7 @@ import { parse, resolve } from 'node:path';
 import { defineConfig } from 'vite';
 
 export default defineConfig(({ mode }) => ({
+  base: '/assets/',
   css: {
     preprocessorOptions: {
       scss: {
@@ -11,7 +12,7 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    outDir: 'src/site/assets',
+    outDir: 'dist/assets',
     emptyOutDir: false,
     sourcemap: mode === 'development',
     cssCodeSplit: true,
