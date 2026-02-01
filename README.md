@@ -35,4 +35,4 @@ npm run prod
 ```
 
 ### Customization
-Rename the `.env-sample` file to `.env` and add in values for your environment. `ROOT_URL` is the base URL of your deployed project and `GTMID` is your ID for Google Tag Manager.
+Rename the `.env-sample` file to `.env` and add in values for your environment. `ROOT_URL` is the base URL of your deployed project.
