@@ -50,14 +50,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!coordTable) return;
     const row = coordTable.getRow(id);
     if (!row) return;
-    emphasizeRow(row.getElement());
+    const element = row.getElement();
+    if (element) emphasizeRow(element);
   }
 
   function deemphasizeRowById(id) {
     if (!coordTable) return;
     const row = coordTable.getRow(id);
     if (!row) return;
-    deemphasizeRow(row.getElement());
+    const element = row.getElement();
+    if (element) deemphasizeRow(element);
   }
 
   function drawCircle(elem, id, shotLocation, rinkType) {
@@ -127,8 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function buildTable(rinkType) {
     currentRinkType = rinkType;
-    const convertedData = [];
-    tableData.every((row) => convertedData.push(convertUnits(row, rinkType)));
+    const convertedData = tableData.map((row) => convertUnits(row, rinkType));
 
     const tableContainer = document.getElementById('coord-table');
     tableContainer.classList.remove('d-none');
@@ -198,6 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const cleanTable = (rinkType) => {
     tableData = [];
     shotCounter = 0;
+    coordTable = null;
     buildTable(rinkType);
   };
 
