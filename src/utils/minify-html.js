@@ -1,13 +1,11 @@
-const htmlmin = require('html-minifier');
-
 module.exports = (content, outputPath) => {
   if (outputPath.endsWith('.html')) {
-    const minified = htmlmin.minify(content, {
-      useShortDoctype: true,
-      removeComments: true,
-      collapseWhitespace: true,
-    });
-    return minified;
+    return content
+      .replace(/<!DOCTYPE\s+html[^>]*>/i, '<!doctype html>')
+      .replace(/<!--[\s\S]*?-->/g, '')
+      .replace(/\s{2,}/g, ' ')
+      .replace(/>\s+</g, '><')
+      .trim();
   }
   return content;
 };

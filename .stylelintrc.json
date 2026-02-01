@@ -11,10 +11,9 @@
       "color-no-hex": true,
       "declaration-block-no-duplicate-properties": true,
       "declaration-no-important": true,
-      "declaration-property-value-blacklist": {
+      "declaration-property-value-disallowed-list": {
         "/^border/": ["none"]
       },
-      "function-parentheses-space-inside": "never",
       "function-url-quotes": "always",
       "max-nesting-depth": 4,
       "media-feature-name-no-vendor-prefix": true,
@@ -22,9 +21,8 @@
       "selector-max-id": 0,
       "selector-no-qualifying-type": true,
       "selector-no-vendor-prefix": true,
-      "string-quotes": "double",
       "value-no-vendor-prefix": true,
-      "unit-whitelist": ["rem", "vh", "vw", "%", "s"],
+      "unit-allowed-list": ["rem", "vh", "vw", "%", "s"],
       "order/properties-order": [
           "position",
           "top",
@@ -196,7 +194,7 @@
           "animation-iteration-count",
           "animation-direction"
       ],
-      "scss/at-import-partial-extension-blacklist": ["scss"],
+      "scss/at-import-partial-extension-disallowed-list": ["scss"],
       "scss/at-import-no-partial-leading-underscore": true,
       "scss/dollar-variable-colon-space-after": "always",
       "scss/dollar-variable-colon-space-before": "never",
