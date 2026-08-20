@@ -14,7 +14,18 @@
     "site:build:prod": "ELEVENTY_ENV=production eleventy",
     "dev": "npm run clean && npm run assets:build:dev && (npm run assets:watch & ELEVENTY_ENV=development eleventy --serve)",
     "prod": "npm run clean && npm run assets:build && npm run site:build:prod",
-    "build": "npm run prod"
+    "build": "npm run prod",
+    "lint": "eslint --no-ignore .eleventy.js .eslintrc.js playwright.config.js vite.config.js vitest.config.js \"scripts/**/*.mjs\" \"src/filters/**/*.js\" \"src/js/**/*.js\" \"src/site/_data/**/*.js\" \"src/utils/**/*.js\" \"tests/**/*.js\"",
+    "lint:styles": "stylelint \"src/scss/**/*.scss\"",
+    "test:unit": "vitest run",
+    "test:unit:coverage": "vitest run --coverage",
+    "test:unit:watch": "vitest",
+    "test:e2e": "npx playwright test",
+    "test:e2e:headed": "npx playwright test --headed --project=chromium",
+    "test:e2e:ui": "npx playwright test --ui",
+    "test:e2e:build": "npm run clean && npm run assets:build:dev && npm run site:build:dev",
+    "test:e2e:serve": "npm run test:e2e:build && node scripts/serve-dist.mjs",
+    "test:e2e:codegen": "node scripts/test-e2e-codegen.mjs"
   },
   "repository": {
     "type": "git",
@@ -30,16 +41,21 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
+    "@playwright/test": "^1.62.1",
+    "@vitest/coverage-v8": "^4.1.11",
     "dotenv": "^16.4.7",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-security": "^3.0.1",
     "html-minifier": "^4.0.0",
+    "jsdom": "^29.1.1",
+    "postcss-scss": "^4.0.9",
     "sass": "^1.97.3",
     "stylelint": "^17.1.0",
     "stylelint-config-standard": "^40.0.0",
     "stylelint-order": "^7.0.1",
-    "stylelint-scss": "^7.0.0"
+    "stylelint-scss": "^7.0.0",
+    "vitest": "^4.1.11"
   }
 }
