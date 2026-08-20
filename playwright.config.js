@@ -1,4 +1,5 @@
 const { defineConfig } = require('@playwright/test');
+const { createArgosReporterOptions } = require('@argos-ci/playwright/reporter');
 
 process.env.PLAYWRIGHT_BROWSERS_PATH = process.env.PLAYWRIGHT_BROWSERS_PATH || '0';
 
@@ -11,8 +12,14 @@ module.exports = defineConfig({
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 2 : 0,
   reporter: [
-    ['list'],
+    [process.env.CI ? 'dot' : 'list'],
     ['html', { open: 'never' }],
+    [
+      '@argos-ci/playwright/reporter',
+      createArgosReporterOptions({
+        uploadToArgos: Boolean(process.env.CI),
+      }),
+    ],
   ],
   use: {
     baseURL,
@@ -20,6 +27,9 @@ module.exports = defineConfig({
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     viewport: { width: 1920, height: 1080 },
+    launchOptions: {
+      args: ['--disable-lcd-text', '--font-render-hinting=none'],
+    },
   },
   projects: [
     {

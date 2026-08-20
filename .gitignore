@@ -6,3 +6,4 @@ src/site/assets/css/*
 playwright-report
 test-results
 coverage
+screenshots

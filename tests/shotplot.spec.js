@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const { readFile } = require('node:fs/promises');
+const { argosScreenshot } = require('@argos-ci/playwright');
 
 test.use({
   viewport: {
@@ -72,6 +73,7 @@ test('loads the rink UI with no startup errors', async ({ page }) => {
   await expect(page.locator('.alert-danger')).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Export to CSV' })).toBeVisible();
   await expect(dataRows(page)).toHaveCount(0);
+  await argosScreenshot(page, 'home-empty-state');
   expect(consoleErrors).toEqual([]);
 });
 
@@ -103,6 +105,7 @@ test('plots shots, keeps newest shots first, and converts units consistently', a
   expect(Math.abs(newestCentimeters.x - Math.round(newestShot.x * 2.54))).toBeLessThanOrEqual(1);
   expect(Math.abs(newestCentimeters.y - Math.round(newestShot.y * 2.54))).toBeLessThanOrEqual(1);
 
+  await argosScreenshot(page, 'north-american-two-shots-centimeters');
   expect(consoleErrors).toEqual([]);
 });
 
@@ -129,6 +132,7 @@ test('switching rink clears plotted shots and resets the default unit', async ({
   await expect(page.getByRole('button', { name: 'Export to CSV' })).toBeVisible();
   await expect(dataRows(page)).toHaveCount(0);
 
+  await argosScreenshot(page, 'rink-reset-after-switching');
   expect(consoleErrors).toEqual([]);
 });
 
@@ -243,12 +247,14 @@ test('hovering shots and rows keeps table highlighting and pagination working', 
   await expect(shot12).not.toHaveClass(/faded/);
   await expect(shot12).toHaveAttribute('r', '45');
   await expect.poll(() => getBackgroundColor(row12FirstCell)).not.toBe(baseRowBackground);
+  await argosScreenshot(page, 'hover-linked-shot-and-row');
 
   await paginationButton(page, 'Next').click();
   await expect(dataRows(page)).toHaveCount(2);
   await expect(page.locator('#coord-table #row-2')).toBeVisible();
   await expect(page.locator('#coord-table #row-1')).toBeVisible();
   await expect(paginationButton(page, 'Prev')).toBeEnabled();
+  await argosScreenshot(page, 'pagination-second-page');
 
   await paginationButton(page, 'Prev').click();
   await expect(dataRows(page)).toHaveCount(10);
