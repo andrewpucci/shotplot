@@ -6,8 +6,8 @@
   src:
     local("Miriam Libre Regular"),
     local("MiriamLibre-Regular"),
-    url("../fonts/miriam-libre-v5-latin-regular.woff2") format("woff2"),
-    url("../fonts/miriam-libre-v5-latin-regular.woff") format("woff");
+    url("../site/assets/fonts/miriam-libre-v5-latin-regular.woff2") format("woff2"),
+    url("../site/assets/fonts/miriam-libre-v5-latin-regular.woff") format("woff");
 }
 
 /* miriam-libre-700 - latin */
@@ -18,8 +18,8 @@
   src:
     local("Miriam Libre Bold"),
     local("MiriamLibre-Bold"),
-    url("../fonts/miriam-libre-v5-latin-700.woff2") format("woff2"),
-    url("../fonts/miriam-libre-v5-latin-700.woff") format("woff");
+    url("../site/assets/fonts/miriam-libre-v5-latin-700.woff2") format("woff2"),
+    url("../site/assets/fonts/miriam-libre-v5-latin-700.woff") format("woff");
 }
 
 header {

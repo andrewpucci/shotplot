@@ -1,12 +1,6 @@
-/* stylelint-disable-next-line selector-no-qualifying-type */
-table.dataTable {
-  /* stylelint-disable-next-line declaration-no-important */
-  border-collapse: collapse !important;
-}
-
 $emphasized-row-bg: lighten(#d59e0d, 40%);
 
-table.dataTable > tbody > tr.emphasized-row > * {
+.tabulator .tabulator-row.emphasized-row .tabulator-cell {
   background-color: $emphasized-row-bg !important;
   box-shadow: inset 0 0 0 9999px $emphasized-row-bg !important;
   transition: background-color 0.2s ease-in, box-shadow 0.2s ease-in;

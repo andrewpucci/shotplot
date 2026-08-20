@@ -1,7 +1,0 @@
-coverage
-dist
-node_modules
-playwright-report
-src/site/assets/js/deps.js
-src/site/assets/js/scripts.js
-test-results

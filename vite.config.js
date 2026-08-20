@@ -2,11 +2,21 @@ import { parse, resolve } from 'node:path';
 import { defineConfig } from 'vite';
 
 export default defineConfig(({ mode }) => ({
+  base: '/assets/',
+  css: {
+    preprocessorOptions: {
+      scss: {
+        quietDeps: true,
+        silenceDeprecations: ['legacy-js-api', 'color-functions', 'global-builtin', 'import', 'if-function'],
+      },
+    },
+  },
   build: {
-    outDir: 'src/site/assets',
+    outDir: 'dist/assets',
     emptyOutDir: false,
     sourcemap: mode === 'development',
     cssCodeSplit: true,
+    chunkSizeWarningLimit: 600,
     rollupOptions: {
       input: {
         scripts: resolve(__dirname, 'src/js/main.js'),
@@ -19,9 +29,13 @@ export default defineConfig(({ mode }) => ({
         },
         chunkFileNames: 'js/[name].js',
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name && assetInfo.name.endsWith('.css')) {
-            const baseName = parse(assetInfo.name).name;
+          const fileName = assetInfo.names?.[0] || '';
+          if (fileName.endsWith('.css')) {
+            const baseName = parse(fileName).name;
             return `css/${baseName}[extname]`;
+          }
+          if (/\.(woff2?|ttf|eot)$/.test(fileName)) {
+            return 'fonts/[name][extname]';
           }
           return '[name][extname]';
         },

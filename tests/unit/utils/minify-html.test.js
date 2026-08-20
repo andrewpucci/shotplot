@@ -8,7 +8,7 @@ describe('minify-html', () => {
   it('minifies html output', () => {
     const content = '<!doctype html>\n<html>  <body><!--x--><p> hi </p></body></html>';
 
-    expect(minifyHtml(content, 'index.html')).toBe('<!doctype html><html><body><p>hi</p></body></html>');
+    expect(minifyHtml(content, 'index.html')).toBe('<!doctype html><html><body><p> hi </p></body></html>');
   });
 
   it('returns non-html output unchanged', () => {

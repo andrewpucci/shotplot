@@ -9,5 +9,5 @@
 
 /* SITE */
   Standards: CSS3, HTML5
-  Components: 11ty, Vite, Bootstrap, DataTables
+  Components: 11ty, Vite, Bootstrap, Tabulator
   Software: VS Code, GitHub Desktop

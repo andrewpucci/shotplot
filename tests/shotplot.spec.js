@@ -40,13 +40,13 @@ const clickRink = async (page, xRatio, yRatio) => {
   });
 };
 
-const dataRows = (page) => page.locator('#coord-table tbody tr[id^="row-"]');
-const emptyStateCell = (page) => page.locator('#coord-table').getByRole('cell', { name: 'No data available in table' });
-const firstCell = (page, rowId) => page.locator(`#${rowId} td`).first();
+const dataRows = (page) => page.locator('#coord-table .tabulator-row[id^="row-"]');
+const firstCell = (page, rowId) => page.locator(`#${rowId} .tabulator-cell`).first();
+const paginationButton = (page, label) => page.locator('#coord-table').getByRole('button', { name: label });
 
 const getRowValues = async (page, rowIndex = 0) => {
   const row = dataRows(page).nth(rowIndex);
-  const cells = row.locator('td');
+  const cells = row.locator('.tabulator-cell');
   const values = await cells.evaluateAll((nodes) => nodes.map((node) => node.textContent.trim()));
 
   return {
@@ -70,7 +70,7 @@ test('loads the rink UI with no startup errors', async ({ page }) => {
   await expect(page.locator('#rink-selector')).toHaveValue('NA');
   await expect(page.locator('#unit-selector')).toHaveValue('in');
   await expect(page.locator('.alert-danger')).toHaveCount(0);
-  await expect(emptyStateCell(page)).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Export to CSV' })).toBeVisible();
   await expect(dataRows(page)).toHaveCount(0);
   expect(consoleErrors).toEqual([]);
 });
@@ -120,13 +120,13 @@ test('switching rink clears plotted shots and resets the default unit', async ({
   await expect(page.locator('#rink-selector')).toHaveValue('IIHF');
   await expect(page.locator('#unit-selector')).toHaveValue('cm');
   await expect(page.locator('#rink svg circle.shot')).toHaveCount(0);
-  await expect(emptyStateCell(page)).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Export to CSV' })).toBeVisible();
   await expect(dataRows(page)).toHaveCount(0);
 
   await page.selectOption('#rink-selector', 'NA');
   await expect(page.locator('#rink-selector')).toHaveValue('NA');
   await expect(page.locator('#unit-selector')).toHaveValue('in');
-  await expect(emptyStateCell(page)).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Export to CSV' })).toBeVisible();
   await expect(dataRows(page)).toHaveCount(0);
 
   expect(consoleErrors).toEqual([]);
@@ -161,12 +161,12 @@ test('records shots as the ice is clicked across rink and unit changes', async (
   await clickRink(page, 0.68, 0.48);
   await expect(page.locator('#rink svg circle.shot')).toHaveCount(1);
   await expect(dataRows(page)).toHaveCount(1);
-  await expect(page.locator('#coord-table tbody tr#row-1')).toContainText('1');
+  await expect(page.locator('#coord-table #row-1')).toContainText('1');
 
   await clickRink(page, 0.61, 0.58);
   await expect(page.locator('#rink svg circle.shot')).toHaveCount(2);
   await expect(dataRows(page)).toHaveCount(2);
-  await expect(page.locator('#coord-table tbody tr#row-2')).toContainText('2');
+  await expect(page.locator('#coord-table #row-2')).toContainText('2');
 
   await page.getByLabel('Rink Size').selectOption('IIHF');
   await expect(page.locator('#unit-selector')).toHaveValue('cm');
@@ -218,9 +218,9 @@ test('hovering shots and rows keeps table highlighting and pagination working', 
 
   await expect(page.locator('#rink svg circle.shot')).toHaveCount(12);
   await expect(dataRows(page)).toHaveCount(10);
-  await expect(page.locator('#coord-table tbody tr#row-12')).toBeVisible();
-  await expect(page.locator('#coord-table tbody tr#row-3')).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Next' })).toBeEnabled();
+  await expect(page.locator('#coord-table #row-12')).toBeVisible();
+  await expect(page.locator('#coord-table #row-3')).toBeVisible();
+  await expect(paginationButton(page, 'Next')).toBeEnabled();
 
   const shot12 = page.locator('#shot-12');
   const shot11 = page.locator('#shot-11');
@@ -244,15 +244,15 @@ test('hovering shots and rows keeps table highlighting and pagination working', 
   await expect(shot12).toHaveAttribute('r', '45');
   await expect.poll(() => getBackgroundColor(row12FirstCell)).not.toBe(baseRowBackground);
 
-  await page.getByRole('link', { name: 'Next' }).click();
+  await paginationButton(page, 'Next').click();
   await expect(dataRows(page)).toHaveCount(2);
-  await expect(page.locator('#coord-table tbody tr#row-2')).toBeVisible();
-  await expect(page.locator('#coord-table tbody tr#row-1')).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Previous' })).toBeEnabled();
+  await expect(page.locator('#coord-table #row-2')).toBeVisible();
+  await expect(page.locator('#coord-table #row-1')).toBeVisible();
+  await expect(paginationButton(page, 'Prev')).toBeEnabled();
 
-  await page.getByRole('link', { name: 'Previous' }).click();
+  await paginationButton(page, 'Prev').click();
   await expect(dataRows(page)).toHaveCount(10);
-  await expect(page.locator('#coord-table tbody tr#row-12')).toBeVisible();
+  await expect(page.locator('#coord-table #row-12')).toBeVisible();
 
   expect(consoleErrors).toEqual([]);
 });
