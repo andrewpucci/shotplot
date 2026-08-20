@@ -1,0 +1,46 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: tuesday
+      time: "09:00"
+      timezone: America/Los_Angeles
+    open-pull-requests-limit: 3
+    labels:
+      - dependencies
+    assignees:
+      - andrewpucci
+    # Keep manifest ranges stable when they already admit the new release;
+    # Dependabot still updates the lockfile/resolved version.
+    versioning-strategy: increase-if-necessary
+    commit-message:
+      prefix: chore
+      prefix-development: chore
+      include: scope
+    groups:
+      npm-production-minor-patch:
+        dependency-type: production
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+      npm-development-minor-patch:
+        dependency-type: development
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+      npm-security-production:
+        applies-to: security-updates
+        dependency-type: production
+        patterns:
+          - "*"
+      npm-security-development:
+        applies-to: security-updates
+        dependency-type: development
+        patterns:
+          - "*"
