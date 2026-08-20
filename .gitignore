@@ -3,3 +3,7 @@ dist
 .env
 src/site/assets/js/*
 src/site/assets/css/*
+playwright-report
+test-results
+coverage
+screenshots

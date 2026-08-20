@@ -44,3 +44,17 @@ updates:
         dependency-type: development
         patterns:
           - "*"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: tuesday
+      time: "09:00"
+      timezone: America/Los_Angeles
+    labels:
+      - dependencies
+      - ci
+    assignees:
+      - andrewpucci
+    open-pull-requests-limit: 5

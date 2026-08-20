@@ -34,5 +34,58 @@ npm run dev
 npm run prod
 ```
 
+## Testing
+
+Use two layers of automated testing:
+- `Vitest` for fast unit coverage of repository-owned logic
+- `Playwright` for full browser flows, rendering interactions, and pagination/export behavior
+- GitHub Actions runs both layers on every pull request and on pushes to `main`
+
+Run the Vitest unit suite:
+```
+npm run test:unit
+```
+
+Run the JavaScript lint and SCSS style checks:
+```
+npm run lint
+npm run lint:styles
+```
+
+Run the Vitest suite with coverage:
+```
+npm run test:unit:coverage
+```
+
+Open Vitest in watch mode while developing:
+```
+npm run test:unit:watch
+```
+
+Run the Playwright end-to-end suite:
+```
+npm run test:e2e
+```
+
+Open Playwright in headed mode:
+```
+npm run test:e2e:headed
+```
+
+Open Playwright UI mode for interactive debugging:
+```
+npm run test:e2e:ui
+```
+
+Record a manual browser session and have Playwright generate test code:
+```
+npm run test:e2e:codegen
+```
+
+The recorder defaults to a `1920x1080` viewport. Override it when needed:
+```
+npm run test:e2e:codegen -- --viewport-size="1440,900"
+```
+
 ### Customization
 Rename the `.env-sample` file to `.env` and add in values for your environment. `ROOT_URL` is the base URL of your deployed project.

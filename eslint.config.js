@@ -29,8 +29,10 @@ module.exports = [
 
       'no-console': 'off',
       'no-alert': 'off',
-
       'import/no-unresolved': 'off',
+      'security/detect-non-literal-fs-filename': 'off',
+      'security/detect-non-literal-require': 'off',
+      'security/detect-object-injection': 'off',
     },
   },
   {
@@ -39,6 +41,16 @@ module.exports = [
       sourceType: 'module',
       globals: {
         ...globals.browser,
+      },
+    },
+  },
+  {
+    files: ['tests/unit/**/*.test.js'],
+    languageOptions: {
+      sourceType: 'module',
+      globals: {
+        ...globals.browser,
+        ...globals.node,
       },
     },
   },
@@ -55,13 +67,25 @@ module.exports = [
     files: [
       '.eleventy.js',
       'eslint.config.js',
+      'playwright.config.js',
       'src/filters/**/*.js',
       'src/utils/**/*.js',
       'src/site/_data/**/*.js',
+      'vitest.config.js',
     ],
     languageOptions: {
       sourceType: 'commonjs',
       globals: {
+        ...globals.node,
+      },
+    },
+  },
+  {
+    files: ['tests/shotplot.spec.js'],
+    languageOptions: {
+      sourceType: 'commonjs',
+      globals: {
+        ...globals.browser,
         ...globals.node,
       },
     },
