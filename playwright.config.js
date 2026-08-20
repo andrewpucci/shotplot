@@ -4,6 +4,7 @@ const { createArgosReporterOptions } = require('@argos-ci/playwright/reporter');
 process.env.PLAYWRIGHT_BROWSERS_PATH = process.env.PLAYWRIGHT_BROWSERS_PATH || '0';
 
 const baseURL = 'http://127.0.0.1:4173';
+const shouldUploadToArgos = Boolean(process.env.CI && process.env.ARGOS_TOKEN);
 
 module.exports = defineConfig({
   testDir: './tests',
@@ -17,7 +18,7 @@ module.exports = defineConfig({
     [
       '@argos-ci/playwright/reporter',
       createArgosReporterOptions({
-        uploadToArgos: Boolean(process.env.CI),
+        uploadToArgos: shouldUploadToArgos,
       }),
     ],
   ],

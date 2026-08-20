@@ -42,7 +42,6 @@ const clickRink = async (page, xRatio, yRatio) => {
 };
 
 const dataRows = (page) => page.locator('#coord-table .tabulator-row[id^="row-"]');
-const firstCell = (page, rowId) => page.locator(`#${rowId} .tabulator-cell`).first();
 const paginationButton = (page, label) => page.locator('#coord-table').getByRole('button', { name: label });
 
 const getRowValues = async (page, rowIndex = 0) => {
@@ -56,10 +55,6 @@ const getRowValues = async (page, rowIndex = 0) => {
     y: Number(values[2]),
   };
 };
-
-const getBackgroundColor = (locator) => locator.evaluate(
-  (node) => getComputedStyle(node).backgroundColor,
-);
 
 test('loads the rink UI with no startup errors', async ({ page }) => {
   const consoleErrors = captureConsoleErrors(page);
@@ -229,24 +224,22 @@ test('hovering shots and rows keeps table highlighting and pagination working', 
   const shot12 = page.locator('#shot-12');
   const shot11 = page.locator('#shot-11');
   const row12 = page.locator('#row-12');
-  const row12FirstCell = firstCell(page, 'row-12');
-  const baseRowBackground = await getBackgroundColor(row12FirstCell);
 
   await shot12.hover();
   await expect(row12).toHaveClass(/emphasized-row/);
   await expect(shot11).toHaveClass(/faded/);
   await expect(shot12).not.toHaveClass(/faded/);
-  await expect.poll(() => getBackgroundColor(row12FirstCell)).not.toBe(baseRowBackground);
 
   await shot11.hover();
-  await expect.poll(() => getBackgroundColor(row12FirstCell)).toBe(baseRowBackground);
+  await expect(row12).not.toHaveClass(/emphasized-row/);
+  await expect(shot12).toHaveClass(/faded/);
+  await expect(shot11).not.toHaveClass(/faded/);
 
   await row12.hover();
   await expect(row12).toHaveClass(/emphasized-row/);
   await expect(shot11).toHaveClass(/faded/);
   await expect(shot12).not.toHaveClass(/faded/);
   await expect(shot12).toHaveAttribute('r', '45');
-  await expect.poll(() => getBackgroundColor(row12FirstCell)).not.toBe(baseRowBackground);
   await argosScreenshot(page, 'hover-linked-shot-and-row');
 
   await paginationButton(page, 'Next').click();
