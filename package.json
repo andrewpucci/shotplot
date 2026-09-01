@@ -45,7 +45,7 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-security": "^4.0.1",
     "globals": "^17.3.0",
-    "jsdom": "^29.1.1",
+    "jsdom": "^30.0.1",
     "postcss-scss": "^4.0.9",
     "sass": "^1.97.3",
     "stylelint": "^17.1.0",
