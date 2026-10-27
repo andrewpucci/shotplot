@@ -24,7 +24,7 @@ module.exports = [
       security: securityPlugin,
     },
     rules: {
-      ...importX.configs['flat/recommended'].rules,
+      ...importX.flatConfigs.recommended.rules,
       ...securityPlugin.configs.recommended.rules,
 
       'no-console': 'off',
