@@ -20,6 +20,12 @@ updates:
       prefix-development: chore
       include: scope
     groups:
+      # @eslint/js declares a peer dependency on the matching eslint major,
+      # so they must always be bumped together in a single PR.
+      npm-eslint:
+        patterns:
+          - "eslint"
+          - "@eslint/js"
       npm-production-minor-patch:
         dependency-type: production
         patterns:
