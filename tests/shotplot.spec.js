@@ -1,5 +1,6 @@
-const { test, expect } = require('@playwright/test');
 const { readFile } = require('node:fs/promises');
+
+const { test, expect } = require('@playwright/test');
 const { argosScreenshot } = require('@argos-ci/playwright');
 
 test.use({
