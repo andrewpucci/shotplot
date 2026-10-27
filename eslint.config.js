@@ -30,6 +30,17 @@ module.exports = [
       'no-console': 'off',
       'no-alert': 'off',
       'import-x/no-unresolved': 'off',
+      'import-x/no-absolute-path': 'error',
+      'import-x/no-empty-named-blocks': 'error',
+      'import-x/no-self-import': 'error',
+      'import-x/no-useless-path-segments': 'error',
+      'import-x/order': [
+        'error',
+        {
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+          'newlines-between': 'always',
+        },
+      ],
       'security/detect-non-literal-fs-filename': 'off',
       'security/detect-non-literal-require': 'off',
       'security/detect-object-injection': 'off',
