@@ -1,5 +1,4 @@
 const js = require('@eslint/js');
-const importPlugin = require('eslint-plugin-import');
 const securityPlugin = require('eslint-plugin-security');
 const globals = require('globals');
 
@@ -20,16 +19,13 @@ module.exports = [
   js.configs.recommended,
   {
     plugins: {
-      import: importPlugin,
       security: securityPlugin,
     },
     rules: {
-      ...importPlugin.configs.recommended.rules,
       ...securityPlugin.configs.recommended.rules,
 
       'no-console': 'off',
       'no-alert': 'off',
-      'import/no-unresolved': 'off',
       'security/detect-non-literal-fs-filename': 'off',
       'security/detect-non-literal-require': 'off',
       'security/detect-object-injection': 'off',
